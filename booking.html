@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIT TRACKER PRO | Slot Booking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .zone-card {
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            background: rgba(255,255,255,0.02);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        .zone-card:hover, .zone-card.selected {
+            border-color: var(--accent-neon-purple);
+            background: rgba(176, 38, 255, 0.05);
+            transform: translateY(-2px);
+        }
+        .zone-card.selected {
+            box-shadow: 0 0 20px var(--accent-neon-purple-glow);
+        }
+        .zone-card.selected::after {
+            content: '\f00c';
+            font-family: 'FontAwesome';
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            color: var(--accent-neon-purple);
+            font-size: 20px;
+        }
+
+        .time-slot {
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            background: rgba(255,255,255,0.05);
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: 1px solid transparent;
+        }
+        .time-slot:hover {
+            border-color: var(--accent-neon-green);
+        }
+        .time-slot.selected {
+            background: var(--accent-neon-green);
+            color: var(--bg-dark);
+            font-weight: 700;
+        }
+        .time-slot.full {
+            opacity: 0.3;
+            cursor: not-allowed;
+            background: rgba(239, 68, 68, 0.1);
+        }
+        
+        .capacity-bar {
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: var(--radius-full);
+            margin-top: 12px;
+            overflow: hidden;
+        }
+        .capacity-fill {
+            height: 100%;
+            border-radius: var(--radius-full);
+        }
+        .low { background: var(--success); }
+        .medium { background: var(--warning); }
+        .high { background: var(--danger); }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-text">FIT TRACKER PRO</div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fa-solid fa-chart-line nav-icon"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="workout.html" class="nav-item">
+                    <i class="fa-solid fa-dumbbell nav-icon"></i>
+                    <span>Workout Plan</span>
+                </a>
+                <a href="attendance.html" class="nav-item">
+                    <i class="fa-solid fa-calendar-check nav-icon"></i>
+                    <span>Consistency</span>
+                </a>
+                <a href="diet.html" class="nav-item">
+                    <i class="fa-solid fa-apple-whole nav-icon"></i>
+                    <span>Diet & Nutrition</span>
+                </a>
+                <a href="booking.html" class="nav-item active">
+                    <i class="fa-solid fa-clock nav-icon"></i>
+                    <span>Book Slot</span>
+                </a>
+                <a href="community.html" class="nav-item">
+                    <i class="fa-solid fa-users nav-icon"></i>
+                    <span>Community</span>
+                </a>
+                <a href="rewards.html" class="nav-item">
+                    <i class="fa-solid fa-medal nav-icon"></i>
+                    <span>Rewards</span>
+                </a>
+                <a href="roadmap.html" class="nav-item">
+                    <i class="fa-solid fa-route nav-icon"></i>
+                    <span>Roadmap</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="index.html" class="nav-item" style="color: var(--danger);">
+                    <i class="fa-solid fa-right-from-bracket nav-icon"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="main-content">
+            <header class="topbar">
+                <i class="fa-solid fa-bars mobile-toggle" onclick="toggleSidebar()"></i>
+                <h1 class="topbar-title animate-slide-up delay-100">Slot Booking</h1>
+                
+                <div class="topbar-actions animate-fade-in delay-200">
+                    <div class="user-profile-mini" onclick="window.location.href='profile.html'">
+                        <div class="avatar">Z</div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="grid-2 animate-slide-up delay-300">
+                <!-- Location & Gym Selection -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">1. Select Location & Gym</span>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">State</label>
+                        <select id="state" onchange="populateCities()" class="form-control" style="padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1);">
+                            <option value="">Select State</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">City</label>
+                        <select id="city" onchange="showGyms()" class="form-control" style="padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1);">
+                            <option value="">Select City</option>
+                        </select>
+                    </div>
+
+                    <div id="gyms" style="max-height: 300px; overflow-y: auto;"></div>
+                </div>
+
+                <!-- Time Selection & Confirm -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">2. Select Time (Today)</span>
+                        <input type="date" class="form-control" style="width: auto; padding: 8px 12px; font-size: 14px; background: rgba(0,0,0,0.3);" value="2026-03-28">
+                    </div>
+
+                    <div class="grid-3" style="margin-bottom: 32px;">
+                        <div class="time-slot full">16:00<br><span style="font-size: 11px; font-weight: normal;">Full</span></div>
+                        <div class="time-slot" onclick="selectTime(this)">17:00<br><span style="font-size: 11px; font-weight: normal; color: var(--warning);">Few left</span></div>
+                        <div class="time-slot selected" onclick="selectTime(this)">18:00<br><span style="font-size: 11px; font-weight: normal; color: var(--success);">Available</span></div>
+                        <div class="time-slot" onclick="selectTime(this)">19:00<br><span style="font-size: 11px; font-weight: normal; color: var(--success);">Available</span></div>
+                        <div class="time-slot" onclick="selectTime(this)">20:00<br><span style="font-size: 11px; font-weight: normal; color: var(--success);">Available</span></div>
+                        <div class="time-slot" onclick="selectTime(this)">21:00<br><span style="font-size: 11px; font-weight: normal; color: var(--success);">Available</span></div>
+                    </div>
+
+                    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                            <span style="color: var(--text-secondary);">Selected Gym</span>
+                            <span style="font-weight: 600;" id="selected-gym-name">Not selected</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 32px;">
+                            <span style="color: var(--text-secondary);">Selected Time</span>
+                            <span style="font-weight: 600; color: var(--accent-neon-green);" id="selected-time-display">Not selected</span>
+                        </div>
+                        
+                        <button class="btn btn-primary" style="width: 100%; font-size: 18px; padding: 16px;" onclick="confirmBooking(this)">CONFIRM BOOKING <i class="fa-solid fa-check"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

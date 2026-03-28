@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIT TRACKER PRO | Sign In</title>
+    <!-- Add FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .auth-container {
+            display: flex;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a24 100%);
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Ambient glowing orbs */
+        .glow-orb-1 {
+            position: absolute;
+            width: 50vw;
+            height: 50vw;
+            max-width: 600px;
+            max-height: 600px;
+            border-radius: 50%;
+            background: rgba(57, 255, 20, 0.12);
+            filter: blur(80px);
+            top: -10vw;
+            left: -10vw;
+            z-index: 0;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .glow-orb-2 {
+            position: absolute;
+            width: 40vw;
+            height: 40vw;
+            max-width: 500px;
+            max-height: 500px;
+            border-radius: 50%;
+            background: rgba(176, 38, 255, 0.12);
+            filter: blur(80px);
+            bottom: -5vw;
+            right: -5vw;
+            z-index: 0;
+            animation: float 10s infinite ease-in-out reverse;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(30px) scale(1.05); }
+            100% { transform: translateY(0px) scale(1); }
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 480px;
+            z-index: 10;
+            padding: 48px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(24, 24, 27, 0.7);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-radius: 24px;
+        }
+
+        .auth-logo {
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+
+        .auth-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            font-size: 16px;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 32px;
+            background: rgba(0,0,0,0.3);
+            border-radius: var(--radius-md);
+            padding: 6px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+        }
+
+        .auth-tab.active {
+            background: var(--bg-card);
+            color: var(--accent-neon-green);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .form-control {
+            background: rgba(0,0,0,0.2);
+            padding: 16px 16px 16px 48px;
+            border-radius: 12px;
+        }
+
+        .btn-full {
+            width: 100%;
+            padding: 16px;
+            font-size: 18px;
+            margin-top: 16px;
+            border-radius: 12px;
+        }
+
+        .auth-form-view {
+            display: none;
+        }
+
+        .auth-form-view.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <div class="glow-orb-1"></div>
+        <div class="glow-orb-2"></div>
+
+        <div class="auth-card animate-slide-up">
+            <div class="logo-text auth-logo">FIT TRACKER PRO</div>
+            <p class="auth-subtitle">Sync your limits. Break them.</p>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchTab('login')">Login</button>
+                <button class="auth-tab" onclick="switchTab('register')">Register</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form-view active" onsubmit="handleAuth(event)">
+                <div class="form-group input-icon-wrapper">
+                    <i class="fa-solid fa-envelope input-icon"></i>
+                    <input type="email" class="form-control" placeholder="Email Address" required value="user@fitsync.com">
+                </div>
+                <div class="form-group input-icon-wrapper">
+                    <i class="fa-solid fa-lock input-icon"></i>
+                    <input type="password" class="form-control" placeholder="Password" required value="password123">
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 24px;">
+                    <label style="color: var(--text-secondary); font-size: 14px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" checked style="accent-color: var(--accent-neon-green);"> Remember me
+                    </label>
+                    <a href="#" style="font-size: 14px; color: var(--accent-neon-green);">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">ENGAGE MODE <i class="fa-solid fa-bolt"></i></button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="registerForm" class="auth-form-view" onsubmit="handleAuth(event)">
+                <div class="form-group input-icon-wrapper">
+                    <i class="fa-solid fa-user input-icon"></i>
+                    <input type="text" class="form-control" placeholder="Full Name" required>
+                </div>
+                <div class="form-group input-icon-wrapper">
+                    <i class="fa-solid fa-envelope input-icon"></i>
+                    <input type="email" class="form-control" placeholder="Email Address" required>
+                </div>
+                <div class="form-group input-icon-wrapper">
+                    <i class="fa-solid fa-lock input-icon"></i>
+                    <input type="password" class="form-control" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn btn-secondary btn-full">JOIN THE GRID <i class="fa-solid fa-arrow-right"></i></button>
+            </form>
+
+            <p style="margin-top: 32px; color: var(--text-secondary); font-size: 14px;">
+                By proceeding, you agree to our <a href="#" style="color: var(--text-primary);">Terms of Service</a> & <a href="#" style="color: var(--text-primary);">Privacy Policy</a>.
+            </p>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

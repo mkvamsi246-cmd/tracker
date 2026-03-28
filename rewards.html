@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIT TRACKER PRO | Rewards</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .badge-hexagon {
+            width: 80px;
+            height: 90px;
+            background: rgba(255,255,255,0.05);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: var(--text-secondary);
+            margin: 0 auto 12px;
+            transition: all var(--transition-bounce);
+        }
+        .badge-card {
+            text-align: center;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .badge-card.unlocked .badge-hexagon {
+            background: linear-gradient(135deg, var(--accent-neon-green), #0fa000);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px var(--accent-neon-green-glow);
+        }
+        .badge-card.unlocked-epic .badge-hexagon {
+            background: linear-gradient(135deg, var(--accent-neon-purple), #6b00ff);
+            color: #fff;
+            box-shadow: 0 0 20px var(--accent-neon-purple-glow);
+        }
+        .badge-card:hover .badge-hexagon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: background var(--transition-fast);
+        }
+        .leaderboard-item:hover {
+            background: rgba(255,255,255,0.02);
+        }
+        .leaderboard-rank {
+            width: 40px;
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--text-secondary);
+        }
+        .rank-1 { color: #fbbf24; font-size: 24px; text-shadow: 0 0 10px rgba(251, 191, 36, 0.5); }
+        .rank-2 { color: #94a3b8; font-size: 20px; }
+        .rank-3 { color: #b45309; font-size: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-text">FIT TRACKER PRO</div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fa-solid fa-chart-line nav-icon"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="workout.html" class="nav-item">
+                    <i class="fa-solid fa-dumbbell nav-icon"></i>
+                    <span>Workout Plan</span>
+                </a>
+                <a href="attendance.html" class="nav-item">
+                    <i class="fa-solid fa-calendar-check nav-icon"></i>
+                    <span>Consistency</span>
+                </a>
+                <a href="diet.html" class="nav-item">
+                    <i class="fa-solid fa-apple-whole nav-icon"></i>
+                    <span>Diet & Nutrition</span>
+                </a>
+                <a href="booking.html" class="nav-item">
+                    <i class="fa-solid fa-clock nav-icon"></i>
+                    <span>Book Slot</span>
+                </a>
+                <a href="community.html" class="nav-item">
+                    <i class="fa-solid fa-users nav-icon"></i>
+                    <span>Community</span>
+                </a>
+                <a href="rewards.html" class="nav-item active">
+                    <i class="fa-solid fa-medal nav-icon"></i>
+                    <span>Rewards</span>
+                </a>
+                <a href="roadmap.html" class="nav-item">
+                    <i class="fa-solid fa-route nav-icon"></i>
+                    <span>Roadmap</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="index.html" class="nav-item" style="color: var(--danger);">
+                    <i class="fa-solid fa-right-from-bracket nav-icon"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="main-content">
+            <header class="topbar">
+                <i class="fa-solid fa-bars mobile-toggle" onclick="toggleSidebar()"></i>
+                <h1 class="topbar-title animate-slide-up delay-100">Smart Rewards</h1>
+                
+                <div class="topbar-actions animate-fade-in delay-200">
+                    <div style="background: rgba(255,255,255,0.05); padding: 8px 16px; border-radius: var(--radius-full); display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-coins" style="color: #fbbf24;"></i>
+                        <span style="font-weight: 700;">2,450 SyncCoins</span>
+                    </div>
+                    <div class="user-profile-mini" onclick="window.location.href='profile.html'">
+                        <div class="avatar">Z</div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="grid-2 animate-slide-up delay-300">
+                <!-- Badges Matrix -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Your Achievements</span>
+                        <span style="font-size: 14px; color: var(--text-secondary);">12/50 Unlocked</span>
+                    </div>
+
+                    <div class="grid-3">
+                        <div class="badge-card unlocked">
+                            <div class="badge-hexagon"><i class="fa-solid fa-fire"></i></div>
+                            <h4 style="font-size: 14px;">7-Day Streak</h4>
+                        </div>
+                        <div class="badge-card unlocked-epic">
+                            <div class="badge-hexagon"><i class="fa-solid fa-dumbbell"></i></div>
+                            <h4 style="font-size: 14px;">Iron Lifter</h4>
+                        </div>
+                        <div class="badge-card unlocked">
+                            <div class="badge-hexagon"><i class="fa-solid fa-person-running"></i></div>
+                            <h4 style="font-size: 14px;">Runner</h4>
+                        </div>
+                        <div class="badge-card">
+                            <div class="badge-hexagon"><i class="fa-solid fa-lock"></i></div>
+                            <h4 style="font-size: 14px; color: var(--text-secondary);">30-Day Streak</h4>
+                        </div>
+                        <div class="badge-card">
+                            <div class="badge-hexagon"><i class="fa-solid fa-lock"></i></div>
+                            <h4 style="font-size: 14px; color: var(--text-secondary);">Century Club</h4>
+                        </div>
+                        <div class="badge-card">
+                            <div class="badge-hexagon"><i class="fa-solid fa-lock"></i></div>
+                            <h4 style="font-size: 14px; color: var(--text-secondary);">Early Bird</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leaderboard & Store -->
+                <div style="display: flex; flex-direction: column; gap: 24px;">
+                    <!-- Global Leaderboard -->
+                    <div class="card" style="flex: 1;">
+                        <div class="card-header">
+                            <span class="card-title">Weekly Leaderboard</span>
+                            <div class="badge badge-neon">TOP 10%</div>
+                        </div>
+                        
+                        <div style="margin-top: -16px;">
+                            <div class="leaderboard-item">
+                                <div class="leaderboard-rank rank-1">1</div>
+                                <div class="avatar" style="width: 36px; height: 36px; font-size: 14px; margin-right: 12px; background: #fbbf24; color: #000;">MK</div>
+                                <div style="flex: 1; font-weight: 600;">Mike Kraft</div>
+                                <div style="font-weight: 800; color: var(--accent-neon-green);">14,200 EXP</div>
+                            </div>
+                            <div class="leaderboard-item">
+                                <div class="leaderboard-rank rank-2">2</div>
+                                <div class="avatar" style="width: 36px; height: 36px; font-size: 14px; margin-right: 12px; background: #94a3b8; color: #000;">SL</div>
+                                <div style="flex: 1; font-weight: 600;">Sarah Lee</div>
+                                <div style="font-weight: 800; color: var(--accent-neon-green);">13,850 EXP</div>
+                            </div>
+                            <div class="leaderboard-item">
+                                <div class="leaderboard-rank rank-3">3</div>
+                                <div class="avatar" style="width: 36px; height: 36px; font-size: 14px; margin-right: 12px; background: #b45309; color: #fff;">DJ</div>
+                                <div style="flex: 1; font-weight: 600;">David Jones</div>
+                                <div style="font-weight: 800; color: var(--accent-neon-green);">11,400 EXP</div>
+                            </div>
+                            <!-- Current User -->
+                            <div class="leaderboard-item" style="background: rgba(57, 255, 20, 0.05); border-left: 4px solid var(--accent-neon-green);">
+                                <div class="leaderboard-rank" style="color: var(--text-primary);">84</div>
+                                <div class="avatar" style="width: 36px; height: 36px; font-size: 14px; margin-right: 12px;">Z</div>
+                                <div style="flex: 1; font-weight: 600; color: var(--accent-neon-green);">Zack G. (You)</div>
+                                <div style="font-weight: 800; color: var(--accent-neon-green);">8,500 EXP</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sync Store Mini -->
+                    <div class="card" style="background: linear-gradient(135deg, rgba(176, 38, 255, 0.1), rgba(24, 24, 27, 0.9)); border-color: rgba(176, 38, 255, 0.3);">
+                        <div class="card-header">
+                            <span class="card-title">Reward Store</span>
+                            <i class="fa-solid fa-store" style="color: var(--accent-neon-purple);"></i>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">Spend your SyncCoins on exclusive gym merch and app customizations.</p>
+                        <button class="btn btn-secondary" style="width: 100%;">Browse Store <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

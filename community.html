@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIT TRACKER PRO | Community & Mentors</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .post-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .post-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #27272a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        .post-meta {
+            display: flex;
+            flex-direction: column;
+        }
+        .post-title {
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .post-content {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        .post-actions {
+            display: flex;
+            gap: 16px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 16px;
+        }
+        .action-btn {
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: color var(--transition-fast);
+        }
+        .action-btn:hover {
+            color: var(--accent-neon-green);
+        }
+        
+        .mentor-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: rgba(24, 24, 27, 0.8);
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
+            border: 1px solid transparent;
+            transition: all var(--transition-fast);
+        }
+        .mentor-card:hover {
+            border-color: var(--accent-neon-purple);
+            transform: translateX(4px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-text">FIT TRACKER PRO</div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fa-solid fa-chart-line nav-icon"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="workout.html" class="nav-item">
+                    <i class="fa-solid fa-dumbbell nav-icon"></i>
+                    <span>Workout Plan</span>
+                </a>
+                <a href="attendance.html" class="nav-item">
+                    <i class="fa-solid fa-calendar-check nav-icon"></i>
+                    <span>Consistency</span>
+                </a>
+                <a href="diet.html" class="nav-item">
+                    <i class="fa-solid fa-apple-whole nav-icon"></i>
+                    <span>Diet & Nutrition</span>
+                </a>
+                <a href="booking.html" class="nav-item">
+                    <i class="fa-solid fa-clock nav-icon"></i>
+                    <span>Book Slot</span>
+                </a>
+                <a href="community.html" class="nav-item active">
+                    <i class="fa-solid fa-users nav-icon"></i>
+                    <span>Community</span>
+                </a>
+                <a href="rewards.html" class="nav-item">
+                    <i class="fa-solid fa-medal nav-icon"></i>
+                    <span>Rewards</span>
+                </a>
+                <a href="roadmap.html" class="nav-item">
+                    <i class="fa-solid fa-route nav-icon"></i>
+                    <span>Roadmap</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="index.html" class="nav-item" style="color: var(--danger);">
+                    <i class="fa-solid fa-right-from-bracket nav-icon"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="main-content">
+            <header class="topbar">
+                <i class="fa-solid fa-bars mobile-toggle" onclick="toggleSidebar()"></i>
+                <h1 class="topbar-title animate-slide-up delay-100">Community & Mentors</h1>
+                
+                <div class="topbar-actions animate-fade-in delay-200">
+                    <div class="user-profile-mini" onclick="window.location.href='profile.html'">
+                        <div class="avatar">Z</div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="grid-3 animate-slide-up delay-300">
+                <!-- Feed Section -->
+                <div style="grid-column: span 2;">
+                    <!-- Create Post -->
+                    <div class="card" style="margin-bottom: 24px; display: flex; gap: 16px; align-items: flex-start;">
+                        <div class="avatar" style="width: 40px; height: 40px; font-size: 16px;">Z</div>
+                        <div style="flex: 1;">
+                            <input type="text" class="form-control" placeholder="Ask a question or share your progress..." style="background: rgba(0,0,0,0.2); border-radius: 20px; margin-bottom: 12px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="display: flex; gap: 16px; color: var(--text-secondary);">
+                                    <i class="fa-solid fa-image" style="cursor: pointer;"></i>
+                                    <i class="fa-solid fa-link" style="cursor: pointer;"></i>
+                                    <i class="fa-solid fa-hashtag" style="cursor: pointer;"></i>
+                                </div>
+                                <button class="btn btn-primary" style="padding: 8px 16px;">Post</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post 1 -->
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="post-avatar">AL</div>
+                            <div class="post-meta">
+                                <span style="font-weight: 600;">Alex L.</span>
+                                <span style="font-size: 12px; color: var(--text-secondary);">2 hours ago • Form Check</span>
+                            </div>
+                        </div>
+                        <h4 class="post-title">Lower back pain during deadlifts?</h4>
+                        <p class="post-content">Hey everyone, I've been progressively overloading my deadlift, but I start feeling a tweak in my lower back around 225lbs. Am I hyperextending at the top? Any tips for bracing better?</p>
+                        <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+                            <span class="badge badge-neon">Powerlifting</span>
+                            <span class="badge" style="background: rgba(255,255,255,0.05); color: var(--text-secondary);">Injury Prevention</span>
+                        </div>
+                        <div class="post-actions">
+                            <div class="action-btn"><i class="fa-regular fa-thumbs-up"></i> 14</div>
+                            <div class="action-btn" style="color: var(--accent-neon-green);"><i class="fa-regular fa-comment"></i> 5 Replies</div>
+                            <div class="action-btn"><i class="fa-regular fa-bookmark"></i> Save</div>
+                        </div>
+                    </div>
+
+                    <!-- Post 2 -->
+                    <div class="post-card" style="border-color: rgba(176, 38, 255, 0.3);">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background: var(--accent-neon-purple); border: 2px solid #fff;"><i class="fa-solid fa-star" style="font-size: 12px;"></i></div>
+                            <div class="post-meta">
+                                <span style="font-weight: 600;">Coach Sarah <i class="fa-solid fa-circle-check" style="color: var(--accent-neon-purple); font-size: 12px;"></i></span>
+                                <span style="font-size: 12px; color: var(--text-secondary);">5 hours ago • Mentor Tip</span>
+                            </div>
+                        </div>
+                        <h4 class="post-title">The TRUTH about "starvation mode"</h4>
+                        <p class="post-content">A lot of you are afraid to eat in a proper deficit because of metabolic damage. Let's clear the air: your body doesn't "hold onto fat" just because you skip breakfast. Consistency over perfection always wins. Drop your diet myths below and I'll debunk them! 👇</p>
+                        <div class="post-actions">
+                            <div class="action-btn" style="color: var(--accent-neon-purple);"><i class="fa-solid fa-heart"></i> 142</div>
+                            <div class="action-btn"><i class="fa-regular fa-comment"></i> 38 Replies</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mentors Sidebar -->
+                <div class="card" style="grid-column: span 1; height: fit-content; background: linear-gradient(180deg, var(--bg-card) 0%, #1a1a24 100%);">
+                    <div class="card-header">
+                        <span class="card-title">Available Mentors</span>
+                        <i class="fa-solid fa-user-shield" style="color: var(--accent-neon-purple);"></i>
+                    </div>
+                    
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Connect with verified coaches for 1-on-1 guidance and form checks.</p>
+
+                    <div class="mentor-card">
+                        <div style="position: relative;">
+                            <img src="https://ui-avatars.com/api/?name=Sarah+M&background=b026ff&color=fff" alt="Sarah" style="width: 48px; height: 48px; border-radius: 50%;">
+                            <div style="position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; background: var(--success); border-radius: 50%; border: 2px solid var(--bg-card);"></div>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px;">Sarah M.</h4>
+                            <p style="color: var(--text-secondary); font-size: 12px;">Nutrition & Wellness</p>
+                        </div>
+                        <i class="fa-solid fa-paper-plane" style="color: var(--text-secondary); cursor: pointer;"></i>
+                    </div>
+
+                    <div class="mentor-card">
+                        <div style="position: relative;">
+                            <img src="https://ui-avatars.com/api/?name=David+R&background=39ff14&color=000" alt="David" style="width: 48px; height: 48px; border-radius: 50%;">
+                            <div style="position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; background: var(--text-secondary); border-radius: 50%; border: 2px solid var(--bg-card);"></div>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px;">David R.</h4>
+                            <p style="color: var(--text-secondary); font-size: 12px;">Powerlifting Pro</p>
+                        </div>
+                        <i class="fa-solid fa-paper-plane" style="color: var(--text-secondary); cursor: pointer;"></i>
+                    </div>
+
+                    <div class="mentor-card">
+                        <div style="position: relative;">
+                            <div class="post-avatar" style="background: #3b82f6;">E</div>
+                            <div style="position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; background: var(--success); border-radius: 50%; border: 2px solid var(--bg-card);"></div>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px;">Elena T.</h4>
+                            <p style="color: var(--text-secondary); font-size: 12px;">HIIT & Mobility</p>
+                        </div>
+                        <i class="fa-solid fa-paper-plane" style="color: var(--text-secondary); cursor: pointer;"></i>
+                    </div>
+
+                    <button class="btn btn-outline" style="width: 100%; margin-top: 16px;">View All Mentors</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
